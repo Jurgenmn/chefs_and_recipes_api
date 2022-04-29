@@ -9,6 +9,8 @@ cur = conn.cursor()
 
 app = Flask(__name__)
 
+######### CHEFS #########
+
 @app.route("/chefs")
 def get_chefs():
     query = f"SELECT * FROM chefs"
@@ -52,6 +54,30 @@ def update_chef(id):
     query = f"UPDATE chefs SET name='{name}', email='{email}', restaurant='{restaurant}' WHERE id='{id}'"
     cur.execute(query)
     return jsonify({"status": "Success"})
+
+@app.route("/chefs/<int:id>", methods=['DELETE'])
+def delete_chef(id):
+    query = f"DELETE FROM chefs WHERE id='{id}'"
+    cur.execute(query)
+    return jsonify({"status": "Succes, chef deleted"})
+
+
+######## DISHES #########
+
+@app.route("/dishes", methods=['GET'])
+def get_all_dishes():
+    query = f"SELECT * FROM dishes"
+    cur.execute(query)
+    all_dishes = cur.fetchall()
+    return jsonify(all_dishes)
+
+@app.route("/dishes/<int:id>", methods=['GET'])
+def get_specific_dishe(id):
+    query = f"SELECT * FROM dishes WHERE id='{id}'"
+    cur.execute(query)
+    dish = cur.fetchone()
+    return jsonify(dish)
+
 
 @app.route("/about")
 def about_world():

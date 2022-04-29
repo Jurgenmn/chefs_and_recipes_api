@@ -15,7 +15,7 @@ CREATE TABLE dishes(
     category TEXT NOT NULL,
     name TEXT NOT NULL,
     chef_id INT NOT NULL,
-    CONSTRAINT fk_chef FOREIGN KEY(chef_id) REFERENCES chefs(id)
+    CONSTRAINT fk_chef FOREIGN KEY(chef_id) REFERENCES chefs(id) ON DELETE CASCADE
 );
 
 CREATE TABLE ingridients(
@@ -29,7 +29,7 @@ CREATE TABLE ingridients(
 CREATE TABLE dishes_ingridients(
     dish_id INT NOT NULL,
     ingridient_id INT NOT NULL,
-    CONSTRAINT fk_dishes_ingridients FOREIGN KEY (dish_id) REFERENCES dishes(id),
+    CONSTRAINT fk_dishes_ingridients FOREIGN KEY (dish_id) REFERENCES dishes(id) ON DELETE CASCADE,
     CONSTRAINT fk_ingridients_dishes FOREIGN KEY (ingridient_id) REFERENCES ingridients(id)
 );
 
