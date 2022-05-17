@@ -93,6 +93,14 @@ def create_dish():
     return jsonify({"status": "Success"})
 
 
+@app.route("/dishes/<int:id>", methods=["DELETE"])
+def delete_dish(id):
+    query = f"DELETE FROM dishes WHERE id='{id}'"
+    cur.execute(query)
+    return jsonify({"Staus": "Success"})
+
+
+
 @app.route("/about")
 def about_world():
     return "<p>The world is beautiful</p>"
