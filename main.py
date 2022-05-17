@@ -78,6 +78,20 @@ def get_specific_dishe(id):
     dish = cur.fetchone()
     return jsonify(dish)
 
+@app.route("/dishes", methods=["POST"])
+def create_dish():
+    data = request.json #This is an object dictionary in python
+    expected_values = ["category", "name", "chef_id"] # we are expecting the user to type these 3 values
+    for key in expected_values:
+        if data.get(key) == None:
+            return (jsonify({'status': 'invalid request, wrong key'}), 400)
+    category = data.get("category")  #name = data["name"]  is the same thing
+    name = data.get("name")
+    chef_id = data.get("chef_id")
+    query = f"INSERT INTO dishes(category, name, chef_id) VALUES ('{category}', '{name}', '{chef_id}')"
+    cur.execute(query)
+    return jsonify({"status": "Success"})
+
 
 @app.route("/about")
 def about_world():
