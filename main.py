@@ -100,6 +100,16 @@ def delete_dish(id):
     return jsonify({"Staus": "Success"})
 
 
+######## INGRIDIENTS ########
+
+@app.route("/ingridients")
+def get_all_ingridients():
+    query = f"SELECT * FROM ingridients"
+    cur.execute(query)
+    records = cur.fetchall()
+    return jsonify(records)
+
+
 
 @app.route("/about")
 def about_world():
