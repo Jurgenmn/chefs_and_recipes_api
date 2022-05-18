@@ -110,6 +110,22 @@ def get_all_ingridients():
     return jsonify(records)
 
 
+@app.route("/ingridients", methods=["POST"])
+def add_ingridient():
+    data = request.json #This is an object dictionary in python
+    expected_values = ["name", "type", "quantity", "measurement_unit"] # we are expecting the user to type these 3 values
+    for key in expected_values:
+        if data.get(key) == None:
+            return (jsonify({'status': f'invalid request, wrong key : {key}'}), 400)
+    name = data.get("name")  #name = data["name"]  is the same thing
+    ingridient_type = data.get("type")
+    quantity = data.get("quantity")
+    measurement_unit = data.get("measurement_unit")
+    query = f"INSERT INTO ingridients(name, type, quantity, mesurement_unit) VALUES ('{name}', '{ingridient_type}', '{quantity}', '{measurement_unit}')"
+    cur.execute(query)
+    return jsonify({"status": "Success", "message": "ingridient added"})
+
+
 
 @app.route("/about")
 def about_world():

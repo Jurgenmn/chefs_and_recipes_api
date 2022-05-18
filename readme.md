@@ -32,7 +32,7 @@
 
 #### INGIDIENTS
 - GET REQUEST `/ingridients` : returns all the ingridients
-- POST REQUEST `/ingridiens` request body `{"name": "tomato", "type": "vegie", "quantity": 1}`
+- POST REQUEST `/ingridiens` request body `{"name": "tomato", "type": "vegie", "quantity": 1, "measurement_unit": "kg"}`
 
 
 Writing tha sql code an example code
